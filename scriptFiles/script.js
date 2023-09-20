@@ -1,27 +1,33 @@
-const options = ['rock', 'paper', 'scissors'];
+const options = ["rock", "paper", "scissors"];
 function getComputerSelection() {
-    let computerSelection = Math.floor((Math.random() * 3));
-    // console.log(options[choice]);
-    return options[computerSelection];
+  let computerSelection = Math.floor((Math.random() * 3));
+  console.log("Computer chose: " + options[computerSelection]);
+  return options[computerSelection];
 }
 
-const error = null;
 function getPlayerSelection() {
-    // let playerSelection = 'rock';
-    let playerResponse = prompt("Rock, paper, or scissors?", "")
-    let playerSelection = playerResponse.toLowerCase().trim();
-    for (let i = 0; i < options.length; i++) {
-        console.log(i);
-        if (playerResponse === options[i]) {
-            console.log("you chose: ", options[i]);
-            return options[i];
-        } else {
-            console.log("you chose: ", error);
-            // return y;
-        }
-    }
+  
+  let playerResponse = prompt("Rock, Paper, or Scissors?", "Rock").toLowerCase().trim();
+  let playerSelection = "";
+  if (playerResponse === options[0] || options[1] || options[2]) {
+    playerSelection += playerResponse;
+    console.log("You chose: " + playerSelection);
     return playerSelection;
-} // This is for testing with 'rock'. Delete when running with prompt().
+  }
+} //Whithout using a loop.
+
+// function getPlayerSelection() {
+//   // let playerResponse = prompt("Rock, paper, or scissors?", "Rock").toLowerCase().trim();
+//   let playerSelection = "";
+//   for (let i = 0; i < options.length; i++) {        
+//     if (playerResponse === options[i]) {
+//       console.log("You chose: " + options[i]);
+//       playerSelection += options[i];
+//       return playerSelection;
+//     }
+//   }
+  
+// } // This is an earlier version of getPlayerSelection() that uses a loop 
 
 function playRound() {
     // console.log("Start playRound test");
@@ -50,6 +56,8 @@ function playRound() {
     }
 }
 // console.log("Results for playRound: " + playRound());
+
+
 
 function scoreRound() { //returns round result as a string value. Ex. "Scissors cuts paper. You win."
     // console.log("Start scoreRound test");
@@ -93,18 +101,18 @@ function scoreRound() { //returns round result as a string value. Ex. "Scissors 
 
 
 function game() {
-    console.log("Start test for: game()")
-    let rounds = 1;
+    console.log("Start test for: game()");
+    
+    let rounds = [1, 2, 3, 4, 5];
     let gameResult = "";
     let finalScore = [0, 0];
   
-    for (let i = 0; i < rounds; i++) {
+    for (let i = 0; i < rounds.length; i++) {
         let score = scoreRound();
-        console.log("Score this round is: ", score);
+        console.log("Current score is: ", score);
         if (score[0] > score[1]) {
             finalScore[0]++;
             console.log("player gets a point: " + finalScore[0]);
-            console.log("Round score is: ", score);
         } else if (score[0] < score[1]) {
             finalScore[1]++;
             console.log("comp gets a point: " + finalScore[1])
@@ -115,6 +123,16 @@ function game() {
         }
         console.log("final score: ", finalScore);
     };
+  
+    // function roundCounter() {
+    //   console.log("Rounds count test start");
+    //   let roundsCount = [];
+    //   for (let i = 0; i < rounds.length; i++) {
+    //     if (++finalScore[0] || ++finalScore[1]) {
+    //         roundCount.push("Round: " + rounds[i]);
+    //     }
+    //   }
+    // }
     
     // console.log("This is finalScore:", finalScore);
     if (finalScore[0] > finalScore[1]) {
@@ -122,9 +140,9 @@ function game() {
     } else if (finalScore[0] < finalScore[1]) {
         gameResult += `The final score is "${finalScore[0]}" to "${finalScore[1]}". You lose!`;
     } else { 
-        gameResult += `The final score is "${finalScore[0]}" to "${finalScore[1]}". It's a tie!`;
+        gameResult += `The final score is "${finalScore[0]}" to "${finalScore[1]}". It's a draw!`;
     }
     return gameResult;
 }
 
-console.log("Results for game: ", game());
+console.log("Results for game: " + game());
