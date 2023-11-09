@@ -1,57 +1,53 @@
-
-// function getPlayerSelection() {
-
-//     let playerResponse = document.querySelector("btn");
-//     console.log(playerResponse);
-
-//     let playerResponse = prompt("Rock, paper, or scissors?", "Rock").toLowerCase().trim();
-//     let playerSelection = "";
-//     for (let i = 0; i < options.length; i++) {        
-//         if (playerResponse === options[i]) {
-//         console.log("You chose: " + options[i]);
-//         playerSelection += options[i];
-//         return playerSelection;
-//     }
-//   }
-// } // This is an earlier version of getPlayerSelection() that uses a loop 
-
 function game() {
-    document.querySelector("demo1").innerHTML = "Click an option below to play!;
+    document.querySelector("#playerClick").innerHTML = "Click an option below to play!;
     let rounds = [1, 2, 3];
-    const options = ["rock", "paper", "scissors"];
+    const options = ["Rock", "Paper", "Scissors"];
     for (let i=0; i<rounds.length; i++) {
         function playRound() {
-            let playerResponse = [];
+            let playerResponse = ["Rock"];
             let computerResponse = [];
+            
             function getPlayerSelection() {
-                const buttons = document.querySelectorAll("#btn-rock, #btn-paper, #btn-scissors");
-                buttons.forEach((button) => {
-                    button.addEventListener('click', (event) => {
-                        function getClick() {
-                            let buttonClick = event.target.textContent.toLowerCase();
-                            if (buttonClick === options[0] || options[1] || options[2]) {
-                                document.querySelector("playerClick").innerHTML = "You chose " + buttonClick + ".";
-                                playerResponse.pop(buttonClick);
-                                playerResponse.push(buttonClick);
-                                // console.log("You chose: " + buttonClick);
-                                return buttonClick;
-                            }
-                        }
-                    });
+               
+                const buttons = document.querySelectorAll("button");
+
+                buttons[0].addEventListener('click', function() {
+                playerResponse.pop();
+                playerResponse.push(buttons[0].textContent);
+                document.querySelector("#playerClick").innerHTML = `You clicked "${buttons[0].textContent}".`
+                return playerResponse[0];
                 });
-            }
-            console.log(getPlayerSelection(buttons));
-            // getPlayerSelection();
+                buttons[1].addEventListener('click', function() {
+                playerResponse.pop();
+                playerResponse.push(buttons[1].textContent);
+                document.querySelector("#playerClick").innerHTML = `You clicked "${buttons[1].textContent}".`
+                return playerResponse[0];
+                });
+                buttons[2].addEventListener('click', function() {
+                playerResponse.pop();
+                playerResponse.push(buttons[2].textContent);
+                document.querySelector("#playerClick").innerHTML = `You clicked "${buttons[2].textContent}".`
+                return playerResponse[0];
+                });
+                
+                return playerResponse;
+            }   
+            getPlayerSelection()
+
+            buttonOne.addEventListener("click", getPlayerSelection);
+            buttonTwo.addEventListener("click", getPlayerSelection);
+            buttonThree.addEventListener("click", getPlayerSelection);
 
             function getComputerSelection() {
                 let computerSelection= Math.floor((Math.random() * 3));
                 computerResponse.pop();
-                computerResponse.push(option[computerSelection]);
-                document.querySelector("compClick").innerHTML = "Computer chose " + computerResponse + ".";
+                computerResponse.push(options[computerSelection]);
+                document.getElementById("compChoice").innerHTML = "Computer chose " + computerResponse[0] + ".";
             }
-            // getComputerSelection();
-
-       
+            getComputerSelection();
+        };
+        playRound();
+    }       
             let result = "";
                 // console.log("Start playRound test");
                 // console.log("initial playerResponse.toString() selection: " + getPlayerSelection());
@@ -60,36 +56,36 @@ function game() {
                 // console.log("computerResponse.toString(): " + computerResponse.toString());
             if (playerResponse.toString() === computerResponse.toString()) {
                 result += "It's a tie.";
-                document.querySelector("demo3").innerHTML = result;
+                document.getElementById("demo3").innerHTML = result;
                 return result;
             } else if (playerResponse.toString() === 'rock' && computerResponse.toString() === 'paper') {  
                 result += "Paper covers rock. I win.";
-                document.querySelector("demo3").innerHTML = result;
+                document.getElementById("demo3").innerHTML = result;
                 return result;
             } else if (playerResponse.toString() === 'rock' && computerResponse.toString() === 'scissors') {
                 result += "Rock breaks scissors. You win.";  
-                document.querySelector("demo3").innerHTML = result;    
+                document.getElementById("demo3").innerHTML = result;    
                 return result;
             } else if (playerResponse.toString() === 'paper' && computerResponse.toString() === 'scissors') {  
                 result += "Scissors cuts paper. I win.";  
-                document.querySelector("demo3").innerHTML = result; 
+                document.getElementById("demo3").innerHTML = result; 
                 return result;
             } else if (playerResponse.toString() === 'paper' && computerResponse.toString() === 'rock') {  
                 result += "Paper covers rock. You win.";
-                document.querySelector("demo3").innerHTML = result; 
+                document.getElementById("demo3").innerHTML = result; 
                 return result;
             } else if (playerResponse.toString() === 'scissors' && computerResponse.toString() === 'rock') {  
                 result += "Rock breaks scissors. I win.";
-                document.querySelector("demo3").innerHTML = result;
+                document.getElementById("demo3").innerHTML = result;
                 return result;
             } else if (playerResponse.toString() === 'scissors' && computerResponse.toString() === 'paper') {  
                 result +=  "Scissors cuts paper. You win.";  
-                document.querySelector("demo3").innerHTML = result;  
+                document.getElementById("demo3").innerHTML = result;  
                 return result;
             };
             // else {
             //     result += "No selection was made. Please select: rock, paper, or scissors.";
-            //     document.querySelector("demo3").innerHTML = result;
+            //     document.getElementById("demo3").innerHTML = result;
             //     return result;
             // };
         } 
@@ -142,29 +138,29 @@ function game() {
 
     for (let i = 0; i < rounds.length; i++) {
         let score = scoreRound();
-        document.querySelector("demo1").innerHTML = "Current score is: " + finalScore[0] + "-" + finalScore[1];
+        document.getElementById("demo1").innerHTML = "Current score is: " + finalScore[0] + "-" + finalScore[1];
         if (i === rounds[0]) {
             roundCount.push(rounds[i]);
-            document.querySelector("demo2").innerHTML = "Round " + roundCount;
+            document.getElementById("demo2").innerHTML = "Round " + roundCount;
         } else if (i === rounds[1]) {
             roundCount.pop(rounds[i]);
             roundCount.push(rounds[i]);
-            document.querySelector("demo2").innerHTML = "Round " + roundCount;
+            document.getElementById("demo2").innerHTML = "Round " + roundCount;
         } else {
             roundCount.pop(rounds[i]);
             roundCount.push(rounds[i]);
-            document.querySelector("demo2").innerHTML = "Round " + roundCount;
+            document.getElementById("demo2").innerHTML = "Round " + roundCount;
         }
         if (score[0] > score[1]) {
             finalScore[0]++;
-            document.querySelector("demo3").innerHTML = "Player gets a point: " + finalScore[0] + "+";
+            document.getElementById("demo3").innerHTML = "Player gets a point: " + finalScore[0] + "+";
         } else if (score[0] < score[1]) {
             finalScore[1]++;
-            document.querySelector("demo3").innerHTML = "Computer gets a point: " + finalScore[1] + "+";
+            document.getElementById("demo3").innerHTML = "Computer gets a point: " + finalScore[1] + "+";
         } else {
             finalScore[0] += 0;
             finalScore[1] += 0;
-            document.querySelector("demo3").innerHTML = "No players recieved points.";
+            document.getElementById("demo3").innerHTML = "No players recieved points.";
         }
     };
     
@@ -185,15 +181,15 @@ function game() {
     // console.log("This is finalScore:", finalScore);
     if (finalScore[0] > finalScore[1]) {
         gameResult += `The final score is: "${finalScore[0]}" to "${finalScore[1]}". You win!`;
-        document.querySelector("demo1").innerHTML = gameResult;
+        document.getElementById("demo1").innerHTML = gameResult;
         return gameResult;
     } else if (finalScore[0] < finalScore[1]) {
         gameResult += `The final score is: "${finalScore[0]}" to "${finalScore[1]}". You lose!`;
-        document.querySelector("demo1").innerHTML = gameResult;
+        document.getElementById("demo1").innerHTML = gameResult;
         return gameResult;
     } else { 
         gameResult += `The final score is: "${finalScore[0]}" to "${finalScore[1]}". It's a draw!`;
-        document.querySelector("demo1").innerHTML = gameResult;
+        document.getElementById("demo1").innerHTML = gameResult;
         return gameResult;
     }; 
 game();
